@@ -20,3 +20,17 @@ jobs:
       - name: Run basic test
         run: |
           python -c "a=2+2; assert a==4; print('Test passed')"
+build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Build docs (dummy)
+        run: |
+          echo "Documentation updated at $(date)" > docs/build_log.txt
+
+      - name: Upload docs
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: docs/
