@@ -1,4 +1,4 @@
-name: CI
+name: CI/CD
 
 on:
   push:
@@ -22,15 +22,10 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
       - name: Run basic test
         run: python -c "print('Все тесты прошли успешно!')"
 
-  build-docs:
+  build-and-deploy-docs:
     runs-on: ubuntu-latest
     needs: tests
     steps:
@@ -45,9 +40,13 @@ jobs:
       - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install sphinx sphinx-rtd-theme  # добавьте другие зависимости, если нужны
+          pip install sphinx sphinx-rtd-theme ghp-import
 
       - name: Build documentation
         run: |
-          cd docs  # если ваша Sphinx документация лежит в папке docs
+          cd docs
           make html
+
+      - name: Deploy documentation to GitHub Pages
+        run: |
+          ghp-import -n -p -f docs/_build/html
