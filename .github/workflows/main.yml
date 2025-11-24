@@ -29,11 +29,10 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt || true
 
-      - name: Run tests
-        run: |
-          python - << 'EOF'
-print("Все тесты прошли успешно!")
-EOF
+            - name: Run tests
+        run: python -c "print('Все тесты прошли успешно!')"
+
+
 
 
   build-docs:
