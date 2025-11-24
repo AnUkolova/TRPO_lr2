@@ -44,8 +44,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          cd docs
-          make html
+          sphinx-build -b html docs/ docs/_build/html
 
       - name: Deploy documentation to GitHub Pages
         run: |
