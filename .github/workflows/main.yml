@@ -1,0 +1,27 @@
+name: Simple Python CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run basic test
+        run: |
+          echo "Running basic test..."
+          python - << 'EOF'
+a = 2+2
+assert a == 4
+print("Test passed!")
+EOF
